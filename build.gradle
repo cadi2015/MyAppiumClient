@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'wp'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'com.github.appium:java-client:7.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+    implementation 'com.google.code.gson:gson:2.8.6'
+}

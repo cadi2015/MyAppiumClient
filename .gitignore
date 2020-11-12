@@ -1,0 +1,16 @@
+.alog
+.alog.*
+.classpath
+.project
+.settings/
+test-output/
+bin/
+.gradle/
+build/
+opencv_default_img/
+gradle/
+*.sh
+minicap/
+out/
+.idea/
+/screenshot.jpg
