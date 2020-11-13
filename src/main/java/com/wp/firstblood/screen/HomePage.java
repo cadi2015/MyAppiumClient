@@ -46,7 +46,6 @@ public class HomePage extends BasePage {
         }
 
         public LivePage letWatch(String str) {
-            System.out.println("哥哥得到了：" + str);
             MobileElement webElement = (MobileElement) appiumDriver.findElementById(listId);
             List<MobileElement> items = webElement.findElementsByClassName(itemStr);
             for (MobileElement web : items) {

@@ -189,7 +189,7 @@ public class Rtc {
                     HomePage homePage = new HomePage(driver);
                     LivePage livePage = homePage.startLive().enterRoom();
                     RoomSetting roomSetting = livePage.openSettingPane().openSei();
-                    ResolutionPage resolutionPage = roomSetting.showResolutionPane().adjustParam(ResolutionPage.Resolution.P_270);
+                    ResolutionPage resolutionPage = roomSetting.showResolutionPane().adjustParam(obtainRes(bag.getData().getAppConfig().getRoomResolution()));
                     resolutionPage.ensure();
                     livePage.startLive();
                     livePage.keepScreenLive(10);
@@ -216,7 +216,7 @@ public class Rtc {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    ResolutionPage rePage = page.openSettingPane().showResolutionPane().adjustParam(ResolutionPage.Resolution.P_270);
+                    ResolutionPage rePage = page.openSettingPane().showResolutionPane().adjustParam(obtainRes(bag.getData().getAppConfig().getRoomResolution()));
                     rePage.ensure();
                     watchListPage.keepScreenLive(Integer.parseInt(bag.getData().getCaseConfig().getKeepLiveWithRoom()));
                 });
@@ -229,6 +229,30 @@ public class Rtc {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private ResolutionPage.Resolution obtainRes(String str) {
+        ResolutionPage.Resolution temp;
+        switch (str) {
+            case "180":
+                temp = ResolutionPage.Resolution.P_180;
+                break;
+            case "270":
+                temp = ResolutionPage.Resolution.P_270;
+                break;
+            case "360":
+                temp = ResolutionPage.Resolution.P_360;
+                break;
+            case "540":
+                temp = ResolutionPage.Resolution.P_540;
+                break;
+            case "720":
+                temp = ResolutionPage.Resolution.P_720;
+                break;
+            default:
+                temp = ResolutionPage.Resolution.P_180;
+        }
+        return temp;
     }
 }
 

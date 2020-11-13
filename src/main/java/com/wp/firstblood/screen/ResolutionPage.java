@@ -16,13 +16,16 @@ public class ResolutionPage extends BasePage {
     }
 
     public ResolutionPage adjustParam(Resolution resolution) {
+        if (resolution == null) {
+            throw new IllegalArgumentException();
+        }
         WebElement webElement = appiumDriver.findElementById(resolutionItem);
         int x = webElement.getLocation().getX();
         int y = webElement.getLocation().getY();
         int w = webElement.getSize().getWidth();
         int moveToXDirectionAt = (int) (w * resolution.getIndex());
-        TouchAction act=new TouchAction(appiumDriver);
-        act.press(PointOption.point(x,y)).moveTo(PointOption.point(moveToXDirectionAt,y)).release().perform();
+        TouchAction act = new TouchAction(appiumDriver);
+        act.press(PointOption.point(x, y)).moveTo(PointOption.point(moveToXDirectionAt, y)).release().perform();
         return this;
     }
 
@@ -31,16 +34,16 @@ public class ResolutionPage extends BasePage {
 
         private float index;
 
-        Resolution( float index){
+        Resolution(float index) {
             this.index = index;
         }
 
-        public float getIndex(){
+        public float getIndex() {
             return index;
         }
     }
 
-    public LivePage ensure(){
+    public LivePage ensure() {
         clickView(sure);
         return new LivePage(appiumDriver);
     }
