@@ -7,6 +7,7 @@ public class LivePage extends BasePage {
     private String roomSetting = "iv_setting";
     private String startBtn = "tv_start_live";
     private String sid = "tv_room_id";
+    private String mic="iv_mic";
 
     LivePage(AppiumDriver appiumDriver) {
         super(appiumDriver);
@@ -19,6 +20,11 @@ public class LivePage extends BasePage {
 
     public LivePage startLive(){
         clickView(startBtn);
+        return this;
+    }
+
+    public LivePage pressMic(){
+        clickView(mic);
         return this;
     }
 

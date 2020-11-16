@@ -8,7 +8,6 @@ import com.wp.firstblood.screen.ResolutionPage;
 import com.wp.firstblood.screen.RoomSetting;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import okhttp3.*;
 import org.junit.AfterClass;
@@ -77,8 +76,8 @@ public class Rtc {
         DesiredCapabilities desiredCapabilities = new SDesiredCapabilities.Builder()
                 .setPlatformName("Android")
                 .setAppiumVersion("1.18.3")
-                .setPlatformVersion("10")
-                .setDeviceName("P7C0218116009553")
+                .setPlatformVersion("7.0")
+                .setDeviceName("LGH872PR4e8a6d8e")
                 .setAppPackageName("com.linkv.live")
                 .setAppActivity(".activity.MainActivity")
                 .build();
@@ -107,7 +106,7 @@ public class Rtc {
     }
 
     private static class SDesiredCapabilities extends DesiredCapabilities {
-        public SDesiredCapabilities(Builder builder) {
+        SDesiredCapabilities(Builder builder) {
             setCapability(CapabilityType.PLATFORM_NAME, builder.platformName);
             setCapability("appium-version", builder.appiumVersion);
             setCapability("platformVersion", builder.platformVersion);
@@ -167,15 +166,9 @@ public class Rtc {
     @Before
     public void setup() {
         for (AppiumDriver driver : drivers) {
-            if (driver instanceof AndroidDriver) {
-                AndroidDriver androidDriver = (AndroidDriver) driver;
-                androidDriver.unlockDevice();
-            }
-            if (driver instanceof IOSDriver) {
-
-            }
+            AndroidDriver androidDriver = (AndroidDriver) driver;
+            androidDriver.unlockDevice();
         }
-
     }
 
     @Test
@@ -191,6 +184,7 @@ public class Rtc {
                     RoomSetting roomSetting = livePage.openSettingPane().openSei();
                     ResolutionPage resolutionPage = roomSetting.showResolutionPane().adjustParam(obtainRes(bag.getData().getAppConfig().getRoomResolution()));
                     resolutionPage.ensure();
+                    livePage.pressMic();
                     livePage.startLive();
                     livePage.keepScreenLive(10);
                     String room = livePage.getRoom();
